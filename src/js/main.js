@@ -56,14 +56,22 @@ const getDataApi =()=>{
 getDataApi(drinks);
 
 
-const handleSearch=(event)=>{
-    const valueInput= input.value;
-    console.log(valueInput);
+/*const handleSearch=()=>{
+    const searchValue= input.value.toLowerCase();
+    let resultCocktails= [];
+    for (const cocktail of drinks){
+        if(cocktail.toLowerCase().includes(searchValue)){
+            resultCocktails.push(cocktail);
+        }
+    }
+    renderCocktail(resultCocktails);
+   
 
 }
-
+handleSearch(drinks);
 
 searchbtn.addEventListener('click', handleSearch);
+*/
 
 //Realizar la funcioón manejadora del evento al botón de buscar
 
