@@ -1,38 +1,28 @@
 'use strict';
 
-const listDrinks = document.querySelector('.js-ulList');
+const listAnimes = document.querySelector('.js-ulList');
 const divInput = document.querySelector('.divInput');
 const searchbtn = document.querySelector('.js-search');
 const input = document.querySelector('.js-textInput');
-let drinks = [];
+let animes = [];
 
-//Sacar datos del servidor y guardarlo en una variable llamada drinks
-/*const renderCocktails=(cocktails)=>{
-    listDrinks.innerHTML='';
-    for(const cocktail of cocktails){
-        listDrinks.innerHTML += `
-      <li>
-            <img src="${cocktail.strDrinkThumb}" alt="${cocktail.strDrink}">
-            <h3>${cocktail.strDrink}</h3>
-        </li>
-       ` 
-    };  
-};*/
-const renderCocktail = (cocktails) => {
-    listDrinks.innerHTML = '';
-    for (const eachcCoktail of cocktails) {
+
+const  renderAnimes = (arrayAnimes) => {
+    listAnimes.innerHTML = '';
+    for (const eachAnime of arrayAnimes) {
 
         const liElement = document.createElement('li');
-        listDrinks.appendChild(liElement);
+        listAnimes.appendChild(liElement);
 
         const img = document.createElement('img');
-        img.setAttribute('src', eachcCoktail.strDrinkThumb);
-        img.setAttribute('alt', eachcCoktail.strDrink);
+        //const imageSrc= eachAnime.strDrinkThumb ? eachAnime.strDrinkThumb : 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+        img.setAttribute('src', eachAnime.images.jpg.image_url);
+        img.setAttribute('alt', eachAnime.title);
         img.setAttribute('class', 'img');
         liElement.appendChild(img);
 
         const h3Title = document.createElement('h3');
-        const h3Text = document.createTextNode(eachcCoktail.strDrink)
+        const h3Text = document.createTextNode(eachAnime.title)
         h3Title.setAttribute('class', 'h3');
         h3Title.appendChild(h3Text);
         liElement.appendChild(h3Title);
@@ -40,20 +30,20 @@ const renderCocktail = (cocktails) => {
 };
 
 
-const getDataApi = (bebida) => {
-    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${bebida}`)
+const getDataApi = (anime) => {
+    fetch(`https://api.jikan.moe/v4/anime?q=${anime}`)
         .then((response) => response.json())
         .then((data) => {
-            drinks = data.drinks;
-            console.log(drinks);
-            //renderCocktails(drinks);
-            renderCocktail(drinks);
+            animes = data.data;
+            console.log(animes);
+            renderAnimes(animes);
+            
         });
 };
 
 // Hacer la funcion de renderizar la lista con el array
 
-getDataApi('margarita');
+getDataApi('naruto');
 
 
 const handleSearch = () => {
