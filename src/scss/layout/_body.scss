@@ -4,3 +4,15 @@
 .hidden {
     display:none ;
 }
+.change {
+    background: grey;
+    font-size: 20px;
+    border: grey solid 3px;
+    color: red;
+}
+.main{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 80px;
+
+}
