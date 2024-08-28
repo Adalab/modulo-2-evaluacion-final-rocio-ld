@@ -40,8 +40,8 @@ const renderCocktail =(cocktails)=>{
 };
 
 
-const getDataApi =()=>{
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+const getDataApi =(bebida)=>{
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${bebida}`)
     .then((response)=>response.json())
     .then((data)=>{
         drinks=data.drinks;  
@@ -53,27 +53,24 @@ const getDataApi =()=>{
 
 // Hacer la funcion de renderizar la lista con el array
 
-getDataApi(drinks);
+getDataApi('margarita');
 
 
-/*const handleSearch=()=>{
-    const searchValue= input.value.toLowerCase();
-    let resultCocktails= [];
-    for (const cocktail of drinks){
-        if(cocktail.toLowerCase().includes(searchValue)){
-            resultCocktails.push(cocktail);
-        }
-    }
-    renderCocktail(resultCocktails);
-   
-
+const handleSearch=()=>{
+    const searchValue= input.value;
+    getDataApi(searchValue);
 }
-handleSearch(drinks);
+
 
 searchbtn.addEventListener('click', handleSearch);
-*/
+
 
 //Realizar la funcioón manejadora del evento al botón de buscar
+
+
+
+
+
 
 
 
