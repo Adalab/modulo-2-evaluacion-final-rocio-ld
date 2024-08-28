@@ -100,9 +100,11 @@ const animeClickada = animes.find((eachAnime)=> eachAnime.mal_id === id);
 animesFavorites.push(animeClickada);
 }console.log(animesFavorites);
 renderAnimesFavorites(animesFavorites);
-ulFav.classList.remove('hidden');git add
+};
+// hacer find para buscar si el anime buscado esta en la lista de favoritos, si no esta devuelveme undefined y si estuviera devuelveme el objeto
+//const findAnimeInFavorite= animesFavorites.find((eachAnime)=>eachAnime.id === eachAnime.mal_id);
+//si esta devolverá diferente de undefined, y añado la clase de las favoritas
 
-}
 
 //Realizar la funcioón manejadora del evento al botón de buscar
 searchbtn.addEventListener('click', handleSearch);
