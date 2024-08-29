@@ -46,19 +46,19 @@ const renderAnimes = (arrayAnimes) => {
 
     };
 };
-/*
-const handleDelete = () => {
-    const indexAnimesFavorite = animesFavorites.findIndex((eachAnime) => eachAnime.mal_id === id);
 
-    if (indexAnimesFavorite === 1) {
-        animeClickadaFavorite = animesFavorites.find((eachAnime) => eachAnime.mal_id === id);
-        animesFavorites.remove(animeClickadaFavorite);
-    };
+const handleDelete = (event) => {
+    const id = parseInt(event.currentTarget.id);
+    const indexFavorite = animesFavorites.findIndex((eachAnime) => eachAnime.mal_id === id);
+    console.log(event.currentTarget.id);
+    animesFavorites.splice(indexFavorite, 1)
+    localStorage.setItem('animeLS', JSON.stringify(animesFavorites));
+
     renderAnimesFavorites(animesFavorites);
     renderAnimes(animes)
 };
 
-*/
+
 const renderAnimesFavorites = (arrayAnimes) => {
     ulFav.innerHTML = '';
 
@@ -69,7 +69,7 @@ const renderAnimesFavorites = (arrayAnimes) => {
         const icon = document.createElement('i');
         icon.setAttribute('class', 'fa-solid fa-circle-xmark');
         liElement.appendChild(icon);
-        liElement.setAttribute('id', eachAnime.mal_id);
+        icon.setAttribute('id', eachAnime.mal_id);
         liElement.setAttribute('class', 'liEvent')
         //liElement.setAttribute('class','<i class="fa-solid fa-circle-xmark"></i>')
         ulFav.appendChild(liElement);
@@ -89,7 +89,7 @@ const renderAnimesFavorites = (arrayAnimes) => {
         liElement.appendChild(h3Title);
 
 
-        //icon.addEventListener('click', handleDelete);
+        icon.addEventListener('click', handleDelete);
     };
 
 };
@@ -134,8 +134,8 @@ const handleFavorites = (event) => {
     if (indexAnimesFavorite === -1) {
         const animeClickada = animes.find((eachAnime) => eachAnime.mal_id === id);
         animesFavorites.push(animeClickada);
-    //la funcion de guardar en el localStorage lo pongo en este punto para que me vaya guardando la lista
-    localStorage.setItem('animeLS', JSON.stringify(animesFavorites));
+        //la funcion de guardar en el localStorage lo pongo en este punto para que me vaya guardando la lista
+        localStorage.setItem('animeLS', JSON.stringify(animesFavorites));
     }
     renderAnimesFavorites(animesFavorites);
     renderAnimes(animes);
