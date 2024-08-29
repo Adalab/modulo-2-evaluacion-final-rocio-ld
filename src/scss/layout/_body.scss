@@ -2,16 +2,17 @@
     background-color: rgb(219, 218, 218);
 }
 .img {
-    width: 200px;
+    width: 130px;
     @media(min-width:768px){
-        width: 300px;
+        width: 180px;
+
     }
 }
 .hidden {
     display:none ;
 }
 .selected {
-    background: grey;
+  
     font-size: 25px;
     border: red solid 5px;
     color: black;
@@ -19,7 +20,7 @@
 .main{
     margin: 10px;
     display: flex;
-    gap: 20px;
+    gap: 5px;
     padding-top: 20px;
 }
 .ulList {
@@ -29,21 +30,48 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;   
-}
-.liList{
-    width: 210px;
     @media(min-width:768px){
-        width: 310px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        flex-direction: row;
+        padding-left: 20px;
+        justify-content: center;
+        align-items: flex-start;
+      
 }  
 }
+.liList{
+    width: 140px;
+    @media(min-width:768px){
+        width: 190px;
+}  
+}
+.liEvent{
+    width: 120px;
+}
+
 .ulListFav {
     list-style: none;
     padding:20px;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 5px;
+    @media(min-width:768px){
+        display: flex;
+        gap: 20px;
+        flex-direction: row;
+        justify-content: center;
+        
+}  
+   
     }
 .imgFav{
-    width: 120px;
+    width: 90px;
     @media(min-width:768px){
-        width: 200px;
+        width: 120px;
     }
     }
 
@@ -72,7 +100,10 @@
         &__textInput{
             border-color: $color;
             padding:3px;
-            width: 350px;
+            width: 200px;
+            @media(min-width:768px){
+                width: 350px;
+            }
             
         }
         &__search {
