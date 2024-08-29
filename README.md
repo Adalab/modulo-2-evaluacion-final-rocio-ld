@@ -12,6 +12,6 @@ Esta página web esta diseñada para realizar una búsqueda de películas animes
 
 ---
 
-**Este buscador** A los amantes Animes te ayudará a realizar una búsqueda meticulosa de cualquier película anime para los amantes
+**Este buscador** a los amantes Animes te ayudará a realizar una búsqueda meticulosa de cualquier película anime 
 
 
