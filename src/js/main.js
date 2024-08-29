@@ -7,6 +7,7 @@ const searchbtn = document.querySelector('.js-search');
 const input = document.querySelector('.js-textInput');
 const liEvent=document.querySelector('.liEvent');
 const ulFav= document.querySelector('.ulListFav')
+const divFav= document.querySelector('.js-divFav');
 let animes = [];
 let animesFavorites=[];
 
@@ -19,9 +20,8 @@ const  renderAnimes = (arrayAnimes) => {
       
         const liElement = document.createElement('li');
         liElement.setAttribute('id',eachAnime.mal_id);
-        liElement.setAttribute('class','liEvent')
+        liElement.setAttribute('class','liList');
         listAnimes.appendChild(liElement);
-
         const img = document.createElement('img');
         const imageSrc= eachAnime.images.jpg.image_url ? eachAnime.images.jpg.image_url : 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
         img.setAttribute('src', eachAnime.images.jpg.image_url);
@@ -35,9 +35,15 @@ const  renderAnimes = (arrayAnimes) => {
         h3Title.appendChild(h3Text);
         liElement.appendChild(h3Title);
 
-
+        //buscar si el anime es favorito
+        const findAnimeInFavorite = animesFavorites.find((item)=>item.mal_id === eachAnime.mal_id);
+        if (findAnimeInFavorite){
+        liElement.classList.add('selected') 
+        };
+        
         liElement.addEventListener('click',handleFavorites);
 
+          
     };
 };
 const  renderAnimesFavorites = (arrayAnimes) => {
@@ -49,13 +55,14 @@ const  renderAnimesFavorites = (arrayAnimes) => {
         const liElement = document.createElement('li');
         liElement.setAttribute('id',eachAnime.mal_id);
         liElement.setAttribute('class','liEvent')
+        liElement.setAttribute('class','<i class="fa-solid fa-circle-xmark"></i>')
         ulFav.appendChild(liElement);
 
         const img = document.createElement('img');
         const imageSrc= eachAnime.images.jpg.image_url ? eachAnime.images.jpg.image_url : 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
         img.setAttribute('src', eachAnime.images.jpg.image_url);
         img.setAttribute('alt', eachAnime.title);
-        img.setAttribute('class', 'img');
+        img.setAttribute('class', 'imgFav');
         liElement.appendChild(img);
 
         const h3Title = document.createElement('h3');
@@ -64,7 +71,10 @@ const  renderAnimesFavorites = (arrayAnimes) => {
         h3Title.appendChild(h3Text);
         liElement.appendChild(h3Title);
 
+     
+
     };
+  
 };
 
 
@@ -79,6 +89,17 @@ const getDataApi = (anime) => {
         });
 };
 
+//Guardo en Local Storage el array favorites, y lo pongo al principio cuando carga la página
+const getLocalAnimeFavorite =()=>{
+    //cargar en local Storage
+    const savedLocalAnimeFavorites= localStorage.getItem('animeLS');
+    if(savedLocalAnimeFavorites){
+        animesFavorites= JSON.parse(savedLocalAnimeFavorites)
+        renderAnimesFavorites(animesFavorites);
+    };
+};
+getLocalAnimeFavorite();
+
 // Hacer la funcion de renderizar la lista con el array
 
 getDataApi('naruto');
@@ -89,28 +110,30 @@ const handleSearch = () => {
     getDataApi(searchValue);
 };
 
-
 const handleFavorites =(event)=>{
 const id= parseInt(event.currentTarget.id);
-console.log(id);
+//la funcion de guardar en el localStorage lo pongo en este punto para que me vaya guardando la lista
+localStorage.setItem('animeLS', JSON.stringify(animesFavorites));
+
+
 //buscar la id a ver si está en el array-> si no está nos devuelve -1, buscar el índice en el array de favoritos
 const indexAnimesFavorite = animesFavorites.findIndex((eachAnime)=> eachAnime.mal_id=== id);
 if (indexAnimesFavorite === -1){
 const animeClickada = animes.find((eachAnime)=> eachAnime.mal_id === id);
 animesFavorites.push(animeClickada);
-}console.log(animesFavorites);
+}
 renderAnimesFavorites(animesFavorites);
+renderAnimes(animes);
 };
-// hacer find para buscar si el anime buscado esta en la lista de favoritos, si no esta devuelveme undefined y si estuviera devuelveme el objeto
-//const findAnimeInFavorite= animesFavorites.find((eachAnime)=>eachAnime.id === eachAnime.mal_id);
-//si esta devolverá diferente de undefined, y añado la clase de las favoritas
+
+
 
 
 //Realizar la funcioón manejadora del evento al botón de buscar
 searchbtn.addEventListener('click', handleSearch);
 
 
-//Realizar una funcion manejadora para marcar favoritos
+
 
 
 
