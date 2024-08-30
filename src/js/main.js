@@ -56,6 +56,11 @@ const handleDelete = (event) => {
 
     renderAnimesFavorites(animesFavorites);
     renderAnimes(animes)
+
+    // añadir clase hidden
+    if (animesFavorites.length === 0) {
+        divFav.classList.add('hidden');
+    }
 };
 
 
@@ -76,7 +81,7 @@ const renderAnimesFavorites = (arrayAnimes) => {
 
 
         const img = document.createElement('img');
-        const imageSrc = eachAnime.images.jpg.image_url ? eachAnime.images.jpg.image_url : 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+        //const imageSrc = eachAnime.images.jpg.image_url ? eachAnime.images.jpg.image_url : 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
         img.setAttribute('src', eachAnime.images.jpg.image_url);
         img.setAttribute('alt', eachAnime.title);
         img.setAttribute('class', 'imgFav');
@@ -134,15 +139,14 @@ const handleFavorites = (event) => {
     if (indexAnimesFavorite === -1) {
         const animeClickada = animes.find((eachAnime) => eachAnime.mal_id === id);
         animesFavorites.push(animeClickada);
+        divFav.classList.remove('hidden');//quitar clase hidden
+        
         //la funcion de guardar en el localStorage lo pongo en este punto para que me vaya guardando la lista
         localStorage.setItem('animeLS', JSON.stringify(animesFavorites));
-    }
+    };
     renderAnimesFavorites(animesFavorites);
     renderAnimes(animes);
 };
-
-
-
 
 
 //Realizar la funcioón manejadora del evento al botón de buscar
