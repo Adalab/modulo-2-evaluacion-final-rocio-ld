@@ -8,6 +8,7 @@ const input = document.querySelector('.js-textInput');
 const liEvent = document.querySelector('.liEvent');
 const ulFav = document.querySelector('.ulListFav')
 const divFav = document.querySelector('.js-divFav');
+const btnLog= document.querySelector('.js-buttonLog');
 let animes = [];
 let animesFavorites = [];
 
@@ -34,6 +35,24 @@ const renderAnimes = (arrayAnimes) => {
         h3Title.setAttribute('class', 'h3');
         h3Title.appendChild(h3Text);
         liElement.appendChild(h3Title);
+
+        const paragraph= document.createElement('p');
+        const textParagraph= document.createTextNode(eachAnime.score); 
+        liElement.appendChild(paragraph);
+        paragraph.appendChild(textParagraph)
+
+        /*const paragraphRecomended=document.createElement('p');
+        const textparRecomended= document.createTextNode(eachAnime.score);
+        liElement.appendChild(paragraphRecomended);
+        paragraphRecomended.appendChild(textparRecomended);*/
+        if(eachAnime.score > 7){
+            const paragraphRecomended=document.createElement('p');
+            const textparRecomended= document.createTextNode('Recomendada');
+            liElement.appendChild(paragraphRecomended);
+            paragraphRecomended.appendChild(textparRecomended);
+        }
+
+       
 
         //buscar si el anime es favorito
         const findAnimeInFavorite = animesFavorites.find((item) => item.mal_id === eachAnime.mal_id);
@@ -148,13 +167,17 @@ const handleFavorites = (event) => {
     renderAnimes(animes);
 };
 
+const handleLog = ()=> {
+   
+    console.log(animesFavorites.length)
+}
 
 //Realizar la funcioón manejadora del evento al botón de buscar
 searchbtn.addEventListener('click', handleSearch);
 
 //Hacer evento para borrar la lista de favoritos y borrar caché
 
-
+btnLog.addEventListener('click', handleLog);
 
 
 
